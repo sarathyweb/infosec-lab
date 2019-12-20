@@ -23,22 +23,22 @@ func NumbersToText(numbers []rune) string {
 	return s
 }
 
-func GetShift() int {
-	var shift int
-	fmt.Print("Enter the number of shifts: ")
-	fmt.Scanf("%d", &shift)
-	shift = shift % 26
-	return shift
+func GetKey() int {
+	var key int
+	fmt.Print("Enter the key: ")
+	fmt.Scanf("%d", &key)
+	key = key % 26
+	return key
 }
 
-func Shift(text string, shift int) string {
+func Shift(text string, key int) string {
 	var numbers []rune
 	numbers = TextToNumbers(text)
 	for index, value := range numbers {
 		if numbers[index] >= 65 && numbers[index] <= 90 {
-			numbers[index] = rune((value+rune(shift)-65)%26 + 65)
+			numbers[index] = rune((value+rune(key)-65)%26 + 65)
 		} else if numbers[index] >= 97 && numbers[index] <= 122 {
-			numbers[index] = rune((value+rune(shift)-97)%26 + 97)
+			numbers[index] = rune((value+rune(key)-97)%26 + 97)
 		} else {
 			log.Fatal(errors.New("Only A-Z and a-z are allowed"))
 		}
@@ -50,24 +50,24 @@ func Shift(text string, shift int) string {
 func Encrypt() {
 	var text string
 	var encrypted_text string
-	var shift int
+	var key int
 
 	fmt.Print("Enter the text you want to encrypt: ")
 	fmt.Scanf("%s", &text)
-	shift = GetShift()
-	encrypted_text = Shift(text, shift)
+	key = GetKey()
+	encrypted_text = Shift(text, key)
 	fmt.Println("The encrypted text is :", encrypted_text)
 }
 
 func Decrypt() {
 	var decrypted_text string
 	var encrypted_text string
-	var shift int
+	var key int
 
 	fmt.Print("Enter the text you want to decrypt: ")
 	fmt.Scanf("%s", &encrypted_text)
-	shift = 26 - GetShift()
-	decrypted_text = Shift(encrypted_text, shift)
+	key = 26 - GetKey()
+	decrypted_text = Shift(encrypted_text, key)
 	fmt.Println("The decrypted text is :", decrypted_text)
 }
 
