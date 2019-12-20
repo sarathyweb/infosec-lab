@@ -68,7 +68,7 @@ func Decrypt() {
 	fmt.Scanf("%s", &encrypted_text)
 	shift = 26 - GetShift()
 	decrypted_text = Shift(encrypted_text, shift)
-	fmt.Println("The encrypted text is :", decrypted_text)
+	fmt.Println("The decrypted text is :", decrypted_text)
 }
 
 func main() {
