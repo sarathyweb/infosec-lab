@@ -50,7 +50,6 @@ func Encrypt() {
 			log.Fatal(errors.New("Only A-Z and a-z are allowed"))
 		}
 	}
-	fmt.Println(numbers)
 	enctypted_text = NumbersToText(numbers)
 	fmt.Println("The encrypted text is :", enctypted_text)
 }
