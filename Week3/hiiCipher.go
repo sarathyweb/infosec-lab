@@ -75,24 +75,26 @@ func main() {
 	var result int
 	for i := 0; i < len(plainText); i++ {
 		for j := 0; j < len(plainText); j++ {
-			// fmt.Println(cipherTextMatrix[i][j], plainTextMatrix[j][0])
-			// fmt.Println(cipherTextMatrix[i][j] * plainTextMatrix[j][0])
 			result += (cipherTextMatrix[i][j] * plainTextMatrix[j][0])
 		}
-		encryptMatrix[i][0] =result %26
+		encryptMatrix[i][0] = result % 26
 		result = 0
 	}
 
 	// Print Encrypted matrix
-	fmt.Println("Encrypteed message: ")
-	for _, v := range encryptMatrix{
-		for _, w := range v{
-			fmt.Println("|",w,"|")
+	fmt.Println("Encrypted message in matrix form: ")
+	for _, v := range encryptMatrix {
+		for _, w := range v {
+			fmt.Println("|", w, "|")
 		}
 	}
+	// Print Encrypted matrix in ASCII form
+	cipherText := make([]rune, len(plainText))
 
-	fmt.Println(encryptMatrix)
-
+	for i, _ := range cipherText {
+		cipherText[i] = NumberToChar(int(encryptMatrix[i][0]))
+	}
+	fmt.Println("Encrypted message :", string(cipherText))
 }
 
 func CharToNumber(r rune) (int, error) {
@@ -103,6 +105,10 @@ func CharToNumber(r rune) (int, error) {
 		return int(r) - 97, nil
 	}
 	return 0, errors.New("Not an alphabet")
+}
+
+func NumberToChar(r int) rune {
+	return rune(r + 65)
 }
 
 // Function to check if an ASCII char is a valid english alphabet
