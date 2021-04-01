@@ -25,6 +25,26 @@ var DecryptionKey = [32]byte{
 var plaintext = []byte("T Partha Sarathy")
 var encrypted [16]byte
 
+func main() {
+	keyLength = 4
+	rounds = keyLength + 6
+	// Expand keys before encrytion
+	ExpandKeys()
+	Encrypt()
+	fmt.Println("Encrypted text")
+	for _, v := range encrypted {
+		fmt.Print(string(v))
+	}
+	fmt.Println()
+	Key = DecryptionKey
+	ExpandKeys()
+	Decrypt()
+	fmt.Println("Decrypted text")
+	for _, v := range plaintext {
+		fmt.Print(string(v))
+	}
+}
+
 func getSboxValue(num byte) byte {
 	var sbox = [256]byte{
 		0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
@@ -306,26 +326,6 @@ func Decrypt() {
 		for j = 0; j < 4; j++ {
 			plaintext[i*4+j] = state[j][i]
 		}
-	}
-}
-
-func main() {
-	keyLength = 128 / 32
-	rounds = keyLength + 6
-	// Expand keys before encrytion
-	ExpandKeys()
-	Encrypt()
-	fmt.Println("Encrypted text")
-	for _, v := range encrypted {
-		fmt.Print(string(v))
-	}
-	fmt.Println()
-	Key = DecryptionKey
-	ExpandKeys()
-	Decrypt()
-	fmt.Println("Decrypted text")
-	for _, v := range plaintext {
-		fmt.Print(string(v))
 	}
 }
 
