@@ -120,7 +120,6 @@ func ExpandKeys() {
 	}
 
 	// Each subsequent round key is deduced from previously deduced round keys
-
 	for i < blockSize*(rounds+1) {
 		for j = 0; j < 4; j++ {
 			temp[j] = roundKey[(i-1)*4+j]
